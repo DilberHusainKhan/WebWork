@@ -2,14 +2,14 @@
 //t2=   find prime number between( CPU )
 function IsPrime(x) {
     let isPrime = true;
-
-    for (let n = 2; n <= x; n++) {
+    let n;
+    for (n = 2; n * n <= x; n++) {
         if (x % n == 0) {
             isPrime = false
             break;
         }
     }
-    return n
+    return isPrime
 }
 
 
@@ -20,25 +20,27 @@ let args = minimist(process.argv)
 
 //task 1
 let t1 = Date.now()
-Console.log("Task1 Starting at " + t1);
+console.log("Task1 Starting at " + t1 % 100000);
 
-let data = fs.readFile(args.source);
+let data = fs.readFileSync(args.source);
 let t2 = Date.now()
-Console.log("Task1 Finshing time is " + t2)
-Console.log("Time Required is" + t2 - t1)
+console.log("Task1 Finshing time is " + t2 % 100000)
+console.log("Time Required is " + (t2 - t1))
 
 //Task2
 let t3 = Date.now()
-Console.log("Task2 Starting Time is" + t3)
+console.log("Task2 Starting Time is" + t3)
 let arr = []
-for (let i = 2; i < args.n; i++) {
+// console.log(args.n)
+for (let i = 2; i <= args.n; i++) {
     let isPrime = IsPrime(i);
     if (isPrime) {
         arr.push(i);
     }
 }
-console.log(arr)
+// console.log(arr)
+
 let t4 = Date.now()
 console.log("Task2 Finish at " + t4)
-console.log("Total time require by Tasks 2 is" + t4 - t3)
-console.log("Total time require by both task is" + t4 - t1)
+console.log("Total time require by Tasks 2 is" + (t4 - t3))
+console.log("Total time require by both task is" + (t4 - t1))
